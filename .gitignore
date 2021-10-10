@@ -2,3 +2,6 @@ uploads/*
 uploads/.*
 
 !uploads/.gitkeep
+
+auth.json
+env.jsonc
