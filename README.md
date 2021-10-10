@@ -11,17 +11,19 @@ This is a Docker setup for my [Node File Uploads Server](https://github.com/davw
 
 ## Introduction
 
-Docker will automatically clone the latest version of the uploads server, and install dependencies with Yarn.
+This container takes away almost all the effort required to deploy this uploads server to a device. I personally use this container on my Raspberry Pi.
 
-The `uploads` folder will be added as a Docker volume and mounted within the container at `/uploads`.
+When starting the container, Docker will automatically pull the lastest Node 16 Docker image to use, as well as cloning the most up-to-date version of the uploads server. Subsequent runs will only call `git pull` instead of performing a full clone. Dependencies are automatically installed using Yarn within the container.
 
-The `env.jsonc` and will be copied to the container automatically as well.
+The `uploads` folder in this directory will be added as a Docker volume and mounted within the container at `/usr/uploads`. Compared to a normal hosting setup, this reduces the risks (but does not eliminate) of access to files outside the uploads folder.
+
+The `env.jsonc` and `auth.json` are linked to the container bi-directionally, meaning that changes to these files will be synced between the host system and the container. Note that modifying the `env.jsonc` **does** require a restart of the container (`docker-compose restart`) due to caching.
 
 ## Editing configuration
 
 When you edit your server configuration, you need to restart the Docker container for the changes to take effect.
 
-A simple `docker-compose up -d` should recreate the container and update the config used for it internally. If it doesn't, check out the [updating documentation](#updating-the-server)
+A simple `docker-compose restart` should recreate the container if it's already running.
 
 ## Updating the server
 
