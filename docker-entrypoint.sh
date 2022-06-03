@@ -13,6 +13,10 @@ fi
 # Install dependencies
 yarn install
 
+# Link mounted config files
+ln -s /auth.json .
+ln -s /env.jsonc .
+
 # Start server
 if [ "$ENVIRONMENT" == "development" ]; then
   yarn dev

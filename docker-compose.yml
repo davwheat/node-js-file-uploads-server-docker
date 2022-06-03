@@ -9,16 +9,15 @@ services:
       - ENVIRONMENT=production
     volumes:
       - /usr/app
-      - /usr/app/node_modules
       - type: bind
         source: ./uploads
         target: /usr/uploads
       - type: bind
         source: ./auth.json
-        target: /usr/app/auth.json
+        target: /auth.json
       - type: bind
         source: ./env.jsonc
-        target: /usr/app/env.jsonc
+        target: /env.jsonc
     ports:
       - "4749:8000"
     restart: always
